@@ -18,6 +18,6 @@ def reconnaissance_chiffre(image, liste_modeles, S):
     for i in liste_modeles:
         im_res = im_loc.resize(i.H, i.W)
         sim.append(im_res.similitude(i))
-    return max(sim), sim.index(max(sim))
+    return sim.index(max(sim))
     
 

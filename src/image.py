@@ -47,7 +47,17 @@ class Image:
     #   on retourne une nouvelle image binarisee
     #==============================================================================
     def binarisation(self, S):
-        pass
+        
+        im_bin = Image()
+        im_bin.set_pixels(np.zeros((self.H, self.W), dtype=np.uint8))
+        for i in range(self.H):
+            for j in range(self.W):
+                if self.pixels[i,j] >= S:
+                    im_bin.pixels[i,j]=255
+                else :
+                    im_bin.pixels[i,j]=0
+        
+        return im_bin
 
 
     #==============================================================================
@@ -59,7 +69,28 @@ class Image:
     #   on retourne une nouvelle image recadree
     #==============================================================================
     def localisation(self):
-        pass
+        
+        im_loc = Image()
+        
+        c_min = self.W
+        l_min = self.H
+        c_max = 0
+        l_max = 0
+        for i in range(self.H):
+             for j in range(self.W):
+                if self.pixels[i][j] == 0:
+                    if i < l_min:
+                        l_min = i
+                    if i > l_max:
+                        l_max = i
+                    if j < c_min:
+                        c_min = j
+                    if j > c_max:
+                        c_max = j
+        
+        im_loc.set_pixels(self.pixels[l_min:l_max,c_min:c_max])
+        return im_loc
+              
 
     #==============================================================================
     # Methode de redimensionnement d'image
